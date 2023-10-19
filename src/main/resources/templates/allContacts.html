@@ -11,11 +11,12 @@
 </head>
 <body>
 
-    <h1>Contacts</h1><br>
-    <form method="post" action="/searchByName">
-        <p>Search by name:</p><input type="text" name="partialName">
-        <input type="submit">
+    <form method="get" action="/">
+        <input type="submit" value="Home">
     </form><br>
+
+    <h1>Contacts</h1><br>
+
     <table style="margin: 0 auto; text-align: center;">
         <tr>
             <th>ID</th>
@@ -28,6 +29,37 @@
             <td th:text="${contact.number}">Number</td>
         </tr>
     </table>
+
+    <form method="post" action="/searchByName">
+        <h3>Search by name:</h3><input type="text" name="partialName">
+        <input type="submit">
+    </form><br>
+
+    <form method="post" action="/deleteById">
+        <h3>Delete by ID:</h3><input type="text" name="id">
+        <input type="submit">
+    </form><br>
+
+    <form method="post" action="/addContact">
+        <h3>Add contact</h3>
+        <p>Enter name:</p><input type="text" name="name">
+        <p>Enter number:</p><input type="text" pattern="[0-9+]*" name="number">
+        <br><br><input type="submit">
+    </form><br>
+
+    <form method="post" action="/changeName">
+        <h3>Change name</h3>
+        <p>Enter ID</p><input type="text" name="id">
+        <p>Enter new name:</p><input type="text" name="name">
+        <br><input type="submit">
+    </form>
+
+    <form method="post" action="/changeNumber">
+        <h3>Change number</h3>
+        <p>Enter ID</p><input type="text" name="id_n">
+        <p>Enter new name:</p><input type="text" pattern="[0-9+]*" name="number">
+        <br><input type="submit">
+    </form>
 
 </body>
 </html>

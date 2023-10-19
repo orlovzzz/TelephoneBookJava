@@ -7,13 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HomeService {
+public class ContactService {
 
     @Autowired
     private ContactRepository contactRepository;
@@ -35,10 +32,7 @@ public class HomeService {
     @Transactional
     public void deleteById(Model model, Long id) {
         Optional<Contact> contactOptional = contactRepository.findById(id);
-        System.out.println(id);
-        System.out.println(contactOptional.isPresent());
         if(contactOptional.isPresent()) {
-            System.out.println(1);
             contactRepository.deleteContactById(id);
             model.addAttribute("contacts", contactRepository.findAll());
         }
@@ -49,6 +43,18 @@ public class HomeService {
         contact.setName(name);
         contact.setNumber(number);
         contactRepository.save(contact);
+        model.addAttribute("contacts", contactRepository.findAll());
+    }
+
+    public void changeNameById(Model model, String name, String id) {
+        Long changeId = Long.parseLong(id);
+        contactRepository.updateNameById(changeId, name);
+        model.addAttribute("contacts", contactRepository.findAll());
+    }
+
+    public void changeNumberById(Model model, String number, String id) {
+        Long changeId = Long.parseLong(id);
+        contactRepository.updateNumberById(changeId, number);
         model.addAttribute("contacts", contactRepository.findAll());
     }
 

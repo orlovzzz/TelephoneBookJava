@@ -1,19 +1,18 @@
 package org.example.controller;
 
-import org.example.service.HomeService;
+import org.example.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class HomeController {
+public class ContactController {
 
     @Autowired
-    private HomeService homeService;
+    private ContactService homeService;
 
     @GetMapping("/")
     public String getHome(Model model) {
@@ -37,6 +36,18 @@ public class HomeController {
     @PostMapping("/addContact")
     public String addContact(@RequestParam("name") String name, @RequestParam("number") String number, Model model) {
         homeService.addContact(model, name, number);
+        return "allContacts";
+    }
+
+    @PostMapping("/changeName")
+    public String changeName(@RequestParam("id") String id, @RequestParam("name") String name, Model model) {
+        homeService.changeNameById(model, name, id);
+        return "allContacts";
+    }
+
+    @PostMapping("/changeNumber")
+    public String changeNumber(@RequestParam("id_n") String id, @RequestParam("number") String number, Model model) {
+        homeService.changeNumberById(model, number, id);
         return "allContacts";
     }
 
