@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts</title>
+    <style>
+        body {
+            text-align: center
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contacts</h1><br>
+    <form method="post" action="/searchByName">
+        <p>Search by name:</p><input type="text" name="partialName">
+        <input type="submit">
+    </form><br>
+    <table style="margin: 0 auto; text-align: center;">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Number</th>
+        </tr>
+        <tr th:each="contact : ${contacts}">
+            <td th:text="${contact.id}">Id</td>
+            <td th:text="${contact.name != null ? contact.name : 'Unknown'}">Name</td>
+            <td th:text="${contact.number}">Number</td>
+        </tr>
+    </table>
+
+</body>
+</html>
